@@ -1,25 +1,44 @@
-export default function Paciente() {
+/* eslint-disable react/prop-types */
+export default function Paciente({ paciente,setPaciente }) {
+
+    const { nombre, propietario, email, fecha, sintomas } = paciente
+
     return (
-        <div className="mx-5 bg-white shadow-md px-5 py-10 rounded-xl">
+        <div className="mx-5 bg-white shadow-md px-5 py-10 rounded-xl mb-5">
             <p className="font-bold mb-3 text-gray-700 uppercase">Nombre: {''}
-                <span className="font-normal normal-case">Hook</span>
+                <span className="font-normal normal-case">{nombre}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Propietario: {''}
-                <span className="font-normal normal-case">Marcos</span>
+                <span className="font-normal normal-case">{propietario}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Email: {''}
-                <span className="font-normal normal-case">correo@correo.com</span>
+                <span className="font-normal normal-case">{email}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Fecha Alta: {''}
-                <span className="font-normal normal-case">10 Diciembre de 2022</span>
+                <span className="font-normal normal-case">{fecha}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Sintomas: {''}
-                <span className="font-normal normal-case">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, vitae minima soluta quas nam ea corporis enim aspernatur! Quas maiores dolorem exercitationem quos consectetur modi consequatur blanditiis facilis neque eius?</span>
+                <span className="font-normal normal-case">{sintomas}</span>
             </p>
+
+            <div className="flex justify-between mt-10">
+                <button type="button"
+                    className="py-2 px-10 bg-indigo-600 rounded hover:bg-indigo-700 text-white font-bold"
+                    onClick={()=>setPaciente(paciente)}
+                >
+                    Editar
+                </button>
+
+                <button type="button"
+                    className="py-2 px-10 bg-red-600 rounded hover:bg-red-700 text-white font-bold"
+                >
+                    Eliminar
+                </button>
+            </div>
         </div>
     )
 }
