@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import Paciente from "./Paciente"
 
-export default function ListadoPacientes({ pacientes, setPaciente }) {
+export default function ListadoPacientes({ pacientes, setPaciente,eliminarPaciente }) {
 
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -18,7 +18,9 @@ export default function ListadoPacientes({ pacientes, setPaciente }) {
             <Paciente
               key={paciente.id}
               paciente={paciente}
-              setPaciente={setPaciente} />
+              setPaciente={setPaciente}
+              eliminarPaciente={eliminarPaciente}
+              />
           ))}
         </>
         :

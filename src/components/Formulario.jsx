@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import Error from "./Error";
 
-export default function Formulario({pacientes,setPacientes,paciente}) {
+export default function Formulario({ pacientes, setPacientes, paciente, setPaciente }) {
 
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
@@ -11,15 +11,23 @@ export default function Formulario({pacientes,setPacientes,paciente}) {
 
   const [error, setError] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (Object.keys(paciente).length > 0) {
+      setNombre(paciente.nombre)
+      setPropietario(paciente.propietario)
+      setEmail(paciente.email)
+      setFecha(paciente.fecha)
+      setSintomas(paciente.sintomas)
+    } else {
+      console.log('No hay nada');
+    }
+  }, [paciente])
 
-  },[paciente])
-
-  const generarId = ()=>{
+  const generarId = () => {
     const random = Math.random().toString(36).substr(2)
     const fecha = Date.now().toString(36)
 
-    return random+fecha
+    return random + fecha
   }
 
   const handleSubmit = (e) => {
@@ -36,11 +44,19 @@ export default function Formulario({pacientes,setPacientes,paciente}) {
         propietario,
         email,
         fecha,
-        sintomas,
-        id: generarId()
+        sintomas  
       }
 
-      setPacientes([...pacientes,objetoPaciente])
+      if (paciente.id) {
+        objetoPaciente.id = paciente.id
+        const pacienteActualizado = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
+        setPacientes(pacienteActualizado)
+        setPaciente({})
+
+      }else{
+        objetoPaciente.id = generarId()
+        setPacientes([...pacientes, objetoPaciente])
+      }
 
       setNombre("")
       setPropietario("")
@@ -123,7 +139,7 @@ export default function Formulario({pacientes,setPacientes,paciente}) {
         </div>
 
         <input type="submit" className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
-          value="Agregar paciente"
+          value={paciente.id ? 'Editar paciente': 'Agregar paciente'}
         />
 
       </form>

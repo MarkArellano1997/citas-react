@@ -1,7 +1,15 @@
 /* eslint-disable react/prop-types */
-export default function Paciente({ paciente,setPaciente }) {
+export default function Paciente({ paciente,setPaciente,eliminarPaciente }) {
 
-    const { nombre, propietario, email, fecha, sintomas } = paciente
+    const { nombre, propietario, email, fecha, sintomas,id } = paciente
+
+    const handleEliminar = ()=>{
+        const respuesta =confirm('Deseas eliminar este paciente')
+
+        if (respuesta) {
+            eliminarPaciente(id)
+        }
+    }
 
     return (
         <div className="mx-5 bg-white shadow-md px-5 py-10 rounded-xl mb-5">
@@ -35,6 +43,7 @@ export default function Paciente({ paciente,setPaciente }) {
 
                 <button type="button"
                     className="py-2 px-10 bg-red-600 rounded hover:bg-red-700 text-white font-bold"
+                    onClick={handleEliminar}
                 >
                     Eliminar
                 </button>
